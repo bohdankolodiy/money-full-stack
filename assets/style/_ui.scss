@@ -1,0 +1,44 @@
+.flex {
+  display: flex;
+}
+
+.colDir {
+  flex-direction: column;
+}
+
+.login-block {
+  background-color: #302d2d;
+  border-radius: 25px;
+  z-index: 3;
+  @include size(500px, max-content);
+  @include flex-box(column, nowrap, center, center);
+  padding: 20px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.cross-line-block {
+  @include size(100%, 1px);
+  @include flex-box(initial, initial, center, center);
+  background-color: #e0e0e0;
+
+  .cross-line-title {
+    border: 1px solid gray;
+    background-color: #302d2d;
+    @include size(40px, 40px);
+    text-align: center;
+    line-height: 40px;
+    border-radius: 10px;
+    color: #e0e0e0;
+  }
+}
+
+.header {
+  background-color: #004f4f;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  height: 50px;
+  line-height: 50px;
+}
+
+.position-absolute {
+  position: absolute;
+}

@@ -1,0 +1,12 @@
+@mixin flex-box($direction, $wrap, $js, $ai) {
+  display: flex;
+  flex-direction: $direction;
+  flex-wrap: $wrap;
+  justify-content: $js;
+  align-items: $ai;
+}
+
+@mixin size($width, $height) {
+  width: $width;
+  height: $height;
+}
