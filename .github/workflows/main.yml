@@ -1,11 +1,12 @@
-name: Build & Deploy Full-Stack app
+name: Build & Deploy Full-Stack App
 
 on:
   push:
     branches:
-      - main  # Change to 'main' if your default branch is 'main'
+      - main  # Adjust to your default branch if necessary
   pull_request:
-    branches: [main]
+    branches:
+      - main
 
 permissions:
   contents: write  # Required to push to the repository
@@ -24,56 +25,44 @@ jobs:
       with:
         node-version: '18'  # Specify the Node.js version
 
-    - name: Install dependencies
-      working-directory: ./money-fe
-      run: npm ci  # Use 'ci' for clean install
-      
-    - name: build project
-      working-directory: ./money-fe
-      run: |
-          npm i
-          npm run build:ci
+    - name: Install dependencies for Angular
+      working-directory: ./money-fe  # Set the working directory to money-fe (Angular project)
+      run: npm ci  # Use 'ci' for a clean install
 
-    - name: npm run Lint command
+    - name: Build Angular project
       working-directory: ./money-fe
-      run: |
-          npm run lint:ci
+      run: npm run build:ci  # Custom build script for CI
 
-    # - name: Build the Angular app
-    #   working-directory: ./money-fe
-    #   run: npm run build --base-href="/sdk-finance-invoice/"  # Adjust base-href if necessary
-    #   env:
-    #     CI: true
+    - name: Run Lint for Angular
+      working-directory: ./money-fe
+      run: npm run lint:ci
 
-    # - name: Configure Git
-    #   working-directory: ./money-fe
-    #   run: |
-    #     git config --global user.name "bohdankolodiy"
-    #     git config --global user.email "b.kolodiy@binariks.com"
-    # - name: Deploy to GitHub Pages
+    # - name: Deploy Angular to GitHub Pages
     #   working-directory: ./money-fe
     #   run: npm run deploy:ci
     #   env:
     #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub token for authentication
+
   build-and-lint-fastify:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Cache node modules
-        uses: actions/cache@v3
-        id: npm-cache # use this to check for `cache-hit` ==> if: steps.npm-cache.outputs.cache-hit != 'true'
-        with:
-          path: ${{ steps.npm-cache-dir.outputs.dir }}
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-      - name: npm install and npm run build commands
-        working-directory: ./money-be
-        run: |
-          npm i
-          npm run build:ci
-      - name: npm run Lint command
-        working-directory: ./money-be
-        run: |
-          npm run lint:ci
 
+    steps:
+    - name: Checkout the repository
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'  # Specify the Node.js version
+
+    - name: Install dependencies for Fastify
+      working-directory: ./money-be  # Set the working directory to money-be (Fastify project)
+      run: npm ci  # Use 'ci' for clean install
+
+    - name: Build Fastify app
+      working-directory: ./money-be
+      run: npm run build:ci  # Custom build script for CI
+
+    - name: Run Lint for Fastify
+      working-directory: ./money-be
+      run: npm run lint:ci
