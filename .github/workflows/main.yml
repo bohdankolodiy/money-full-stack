@@ -25,27 +25,33 @@ jobs:
         node-version: '18'  # Specify the Node.js version
 
     - name: Install dependencies
+      working-directory: ./money-fe
       run: npm ci  # Use 'ci' for clean install
       
     - name: build project
+      working-directory: ./money-fe
       run: |
           npm i
           npm run build:ci
 
     - name: npm run Lint command
+      working-directory: ./money-fe
       run: |
           npm run lint:ci
 
     # - name: Build the Angular app
+    #   working-directory: ./money-fe
     #   run: npm run build --base-href="/sdk-finance-invoice/"  # Adjust base-href if necessary
     #   env:
     #     CI: true
 
     # - name: Configure Git
+    #   working-directory: ./money-fe
     #   run: |
     #     git config --global user.name "bohdankolodiy"
     #     git config --global user.email "b.kolodiy@binariks.com"
     # - name: Deploy to GitHub Pages
+    #   working-directory: ./money-fe
     #   run: npm run deploy:ci
     #   env:
     #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub token for authentication
@@ -62,10 +68,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       - name: npm install and npm run build commands
+        working-directory: ./money-be
         run: |
           npm i
           npm run build:ci
       - name: npm run Lint command
+        working-directory: ./money-be
         run: |
           npm run lint:ci
 
