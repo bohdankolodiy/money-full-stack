@@ -58,10 +58,8 @@ class AuthController {
     reply: FastifyReply
   ) {
     try {
-      console.log('asdasdadas');
-      
       const { email, password } = req.body;
-
+      
       const user: IUser = await authService.findOne(req.db, email);
 
       if (!user)

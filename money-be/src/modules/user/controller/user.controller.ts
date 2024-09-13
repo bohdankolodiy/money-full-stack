@@ -13,8 +13,6 @@ class UserController {
 
   async getUser(req: FastifyRequest, reply: FastifyReply) {
     try {
-      console.log("here");
-
       const user: IUser = await userService.getAuthUser(req);
       userController.user = user;
 

@@ -92,8 +92,6 @@ server.register(fastifyPostgres, {
 });
 
 async function runMigrations(): Promise<void> {
-  console.log('grgrt');
-  
   const client = new Client({
     host: process.env.DB_HOST!,
     user: process.env.DB_USER!,

@@ -14,6 +14,15 @@ services:
       dockerfile: Dockerfile
     ports:
       - 3000:3000
+    environment:
+      SECRET_KEY: 10
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASS: qwerty1234
+      DB_NAME: db123
+      MAILER_USER: destini46@ethereal.email
+      MAILER_PASS: FX1VUbNgvnUp17uWsa
     networks:
       - app-network
 
@@ -23,12 +32,11 @@ services:
       POSTGRES_PASSWORD: qwerty1234
       POSTGRES_USER: postgres
       POSTGRES_DB: db123
+    ports:
+      - "5432:5432"
     networks:
       - app-network
-
 
 networks:
   app-network:
     driver: bridge
-
-
