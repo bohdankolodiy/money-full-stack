@@ -1,0 +1,25 @@
+@import "../../../../assets/style/styles";
+
+:host {
+  @include size(80px, 100vh);
+  display: block;
+  background-color: #302d2d;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  @include flex-box(column, nowrap, start, center);
+  position: relative;
+}
+
+.nav-icon {
+  @include size(40px, 40px);
+  border-radius: 15px;
+}
+
+mat-divider {
+  border-top-color: #004f4f !important;
+  border-top-width: 5px !important;
+  margin: 10px 0 !important;
+}
+
+.mat-icon {
+  @include size(initial, initial);
+}

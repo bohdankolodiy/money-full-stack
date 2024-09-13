@@ -1,0 +1,13 @@
+<h2 mat-dialog-title class="white">{{ title }}</h2>
+<mat-dialog-content class="whitegray"> {{ text }} </mat-dialog-content>
+<mat-dialog-actions class="pl-20">
+  <button mat-button mat-raised-button color="warn" mat-dialog-close>No</button>
+  <button
+    mat-button
+    mat-raised-button
+    color="primary"
+    [mat-dialog-close]="'yes'"
+  >
+    Ok
+  </button>
+</mat-dialog-actions>

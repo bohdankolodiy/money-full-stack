@@ -1,0 +1,142 @@
+<app-header [title]="'History'"></app-header>
+
+<main class="w-100 flex mt-20">
+  <section
+    class="w-58 h-100 p-20 flex colDir align-items-center history-block mr-10"
+  >
+    @for (transact of transacts; track transact) {
+      <div class="w-90 flex align-items-center justify-space-between mt-30">
+        <h2 class="text-align-center white">{{ getDate(transact) }}</h2>
+        <p class="white">{{ transact.amount }}</p>
+      </div>
+      @for (item of transact?.items; track item?.id; let j = $index) {
+        <div
+          class="bg-black p-20 history-item mt-20 flex align-items-center justify-space-between"
+        >
+          @if (isReciever(item)) {
+            <ng-container
+              *ngTemplateOutlet="reciever; context: { $implicit: item }"
+            ></ng-container>
+          } @else {
+            <ng-container
+              *ngTemplateOutlet="sender; context: { $implicit: item }"
+            ></ng-container>
+          }
+        </div>
+      }
+    }
+  </section>
+  <section class="w-40 h-100 box-shadow p-10">
+    <h2 class="white text-align-center bg-lightmain p-10 ml--10 mr--10">
+      Find transact
+    </h2>
+    <div class="w-100 flex align-items-start justify-space-around mt-20">
+      <mat-form-field class="w-80">
+        <mat-label>Enter transact id</mat-label>
+        <input matInput [formControl]="search" />
+      </mat-form-field>
+      <button
+        mat-mini-fab
+        aria-label="search"
+        class="bg-lightmain mt-5"
+        (click)="searchHistory()"
+      >
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+
+    <mat-divider class="w-100"></mat-divider>
+
+    @for (item of histroySearch; track item?.id; let j = $index) {
+      <div
+        class="bg-black p-20 history-item mt-20 flex align-items-center justify-space-between w-100"
+      >
+        @if (isReciever(item)) {
+          <ng-container
+            *ngTemplateOutlet="reciever; context: { $implicit: item }"
+          ></ng-container>
+        } @else {
+          <ng-container
+            *ngTemplateOutlet="sender; context: { $implicit: item }"
+          ></ng-container>
+        }
+      </div>
+    }
+  </section>
+</main>
+
+<ng-template #reciever let-item>
+  <mat-icon class="white bg-lightmain border-radius-10 font-size-30">
+    keyboard_double_arrow_left
+  </mat-icon>
+  <div class="w-80">
+    <p class="whitegray">
+      {{ item.action | uppercase }}
+      {{ getMessageByStatus(item.status) }}
+      - ID: {{ item.id }}
+    </p>
+    <p class="white mt-5">Money transfer from {{ item.card || item.wallet }}</p>
+  </div>
+  <p [class]="item.status === 'Revert' ? 'whitegray' : 'green'">
+    {{ item.amount }}
+  </p>
+
+  @if (item.status === "Pending") {
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+      aria-label="approvement action"
+      class="white"
+    >
+      <mat-icon>more_vert</mat-icon>
+    </button>
+
+    <mat-menu #menu="matMenu">
+      <h3 class="text-align-center ml-20 mr-20 mb-10">Approvement</h3>
+      <button mat-menu-item (click)="updatePaymentStatus(item, 'Success')">
+        <mat-icon class="green">check</mat-icon>
+        <span>Accept</span>
+      </button>
+      <button mat-menu-item (click)="updatePaymentStatus(item, 'Cancel')">
+        <mat-icon>close</mat-icon>
+        <span>Decline</span>
+      </button>
+    </mat-menu>
+  }
+</ng-template>
+
+<ng-template #sender let-item>
+  <mat-icon class="white bg-lightmain border-radius-10 font-size-30">
+    keyboard_double_arrow_right
+  </mat-icon>
+  <div class="w-80">
+    <p class="whitegray">
+      {{ item.action | uppercase }}
+      {{ getMessageByStatus(item.status) }}
+      - ID: {{ item.id }}
+    </p>
+    <p class="white mt-5">Money transfer to {{ item.card || item.wallet }}</p>
+  </div>
+  <p [class]="item.status === 'Revert' ? 'whitegray' : 'orange'">
+    {{ item.amount }}
+  </p>
+
+  @if (item.status === "Success" && isLastTransfer(item)) {
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+      aria-label="approvement action"
+      class="white"
+    >
+      <mat-icon>more_vert</mat-icon>
+    </button>
+
+    <mat-menu #menu="matMenu">
+      <h3 class="text-align-center ml-20 mr-20 mb-10">Reverting</h3>
+      <button mat-menu-item (click)="updatePaymentStatus(item, 'Revert')">
+        <mat-icon class="green">restore</mat-icon>
+        <span>Revert</span>
+      </button>
+    </mat-menu>
+  }
+</ng-template>

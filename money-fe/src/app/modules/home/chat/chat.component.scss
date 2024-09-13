@@ -1,0 +1,134 @@
+@import "../../../../assets/style/styles";
+
+:host {
+  @include size(100%, 100%);
+  @include flex-box(row, nowrap, space-between, center);
+}
+
+.chat-list {
+  background-color: #302d2d;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  // padding: 20px;
+  @include size(350px, 100%);
+  position: relative;
+
+  &-container {
+    @include size(100%, 50%);
+    // padding-right: 10px;
+    .chat {
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      padding: 15px;
+      cursor: pointer;
+
+      &-title {
+        font-weight: bolder;
+        font-size: 18px;
+      }
+
+      &-text {
+        //   width: 200px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        font-weight: 100;
+      }
+    }
+  }
+
+  .chat-search {
+    height: 40px;
+  }
+
+  .chat-search-button {
+    @include size(35px, 35px);
+    mat-icon {
+      line-height: 25px;
+      font-size: 20px;
+    }
+  }
+
+  mat-divider {
+    border-top-color: #004f4f !important;
+    border-top-width: 5px !important;
+  }
+
+  ::ng-deep {
+    .mat-mdc-form-field-subscript-wrapper {
+      display: none;
+    }
+    .mat-mdc-form-field-infix {
+      padding-top: 0 !important;
+      padding-bottom: 0% !important;
+      height: 40px;
+      min-height: unset !important;
+      input {
+        height: 100% !important;
+      }
+    }
+  }
+}
+
+.messages-container {
+  @include size(calc(100% - 353px), 100%);
+
+  .messages-block {
+    @include size(calc(100% - 40px), 80%);
+    margin: 0px auto;
+    overflow-y: auto;
+  }
+
+  .message-text {
+    background-color: #302d2d;
+    width: fit-content;
+    max-width: calc(100% - 40px);
+    padding: 20px;
+    word-wrap: normal;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin-bottom: 15px;
+
+    &.sender {
+      align-self: flex-end;
+      margin-right: 10px;
+    }
+
+    &.reciever {
+      margin-left: 10px;
+    }
+  }
+
+  .message-title {
+    background-color: #302d2d;
+    border-bottom: 5px solid #004f4f;
+    @include size(100%, 80px);
+  }
+
+  .text-input {
+    border-top: 5px solid #004f4f;
+    padding: 20px;
+    background-color: #302d2d;
+    // box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+    input {
+      @include size(90%, 35px);
+      background-color: transparent;
+      border: unset;
+      &:focus {
+        border-radius: 5px;
+        outline: 3px solid #004f4f;
+      }
+    }
+  }
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+::-webkit-scrollbar-track {
+  background: #302d2d;
+}
+::-webkit-scrollbar-thumb {
+  background: #004f4f;
+}

@@ -1,0 +1,87 @@
+<main class="component-background">
+  <section class="login-block" [formGroup]="registrationForm">
+    <h2 class="mb-30 white">SIGN UP</h2>
+
+    <mat-form-field class="w-80 mb-15">
+      <mat-label>Enter your email</mat-label>
+      <input
+        matInput
+        placeholder="pat@example.com"
+        [formControlName]="'email'"
+        required
+      />
+      @if (email.invalid) {
+      <mat-error>{{ emailError }}</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field class="w-80 mb-15">
+      <mat-label>Enter your password</mat-label>
+      <input
+        matInput
+        [type]="passwordVisibility ? 'password' : 'text'"
+        [formControlName]="'password'"
+        required
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="passwordVisibility = !passwordVisibility"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="passwordVisibility"
+      >
+        <mat-icon
+          >{{ passwordVisibility ? "visibility_off" : "visibility" }}
+        </mat-icon>
+      </button>
+      @if (password.invalid) {
+      <mat-error>{{ passwordError }}</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field class="w-80 mb-15">
+      <mat-label>Confirm your password</mat-label>
+      <input
+        matInput
+        [type]="passwordConfirmVisibility ? 'password' : 'text'"
+        [formControlName]="'confirmPassword'"
+        required
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="passwordConfirmVisibility = !passwordConfirmVisibility"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="passwordConfirmVisibility"
+      >
+        <mat-icon
+          >{{ passwordConfirmVisibility ? "visibility_off" : "visibility" }}
+        </mat-icon>
+      </button>
+      @if (confirmPassword.invalid) {
+      <mat-error>{{ confirmPasswordError }}</mat-error>
+      }
+    </mat-form-field>
+
+    <button
+      mat-flat-button
+      color="primary"
+      class="signIn-button w-50 mb-30"
+      (click)="submitForm()"
+      [disabled]="this.registrationForm.invalid"
+    >
+      ENTER
+    </button>
+    <p class="cross-line-block mb-30">
+      <span class="cross-line-title">Or</span>
+    </p>
+
+    <button
+      mat-flat-button
+      color="primary"
+      class="another-login-button"
+      [routerLink]="['/login']"
+    >
+      Log in
+    </button>
+  </section>
+</main>

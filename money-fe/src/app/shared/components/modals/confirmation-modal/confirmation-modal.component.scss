@@ -1,0 +1,7 @@
+@import "../../../../../assets/style/styles";
+
+::ng-deep {
+  .mat-mdc-dialog-container .mdc-dialog__surface {
+    background-color: #302d2d !important;
+  }
+}

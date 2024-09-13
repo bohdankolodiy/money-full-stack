@@ -1,0 +1,14 @@
+{
+  "name": "money-full-stack",
+  "version": "1.0.0",
+  "description": "My full stack project",
+  "scripts": {
+    "docker:build": "docker-compose up --build",
+    "docker:compose": "docker-compose up"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {}
+}

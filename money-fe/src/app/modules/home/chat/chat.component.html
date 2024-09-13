@@ -1,0 +1,111 @@
+<section class="chat-list">
+  <div class="w-100 flex align-items-start justify-space-around p-17">
+    <mat-form-field class="w-80 chat-search">
+      <input matInput [formControl]="search" placeholder="wallet" />
+    </mat-form-field>
+    <button
+      mat-mini-fab
+      aria-label="search"
+      class="bg-lightmain chat-search-button"
+    >
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
+
+  <mat-divider class="w-100 mb-5"></mat-divider>
+
+  <div class="chat-list-container">
+    @for (chat of chats; track chat.chat_id) {
+      <div
+        class="chat w-100 flex justify-space-between align-items-center mb-5"
+        (click)="onSelectChat(chat)"
+      >
+        <div class="w-80">
+          <p class="white chat-title mb-5">
+            {{ getChatTitle(chat) | wallet }}
+          </p>
+          @if (chat.last_message_id) {
+            <p class="whitegray chat-text">
+              {{ chat.last_message.text }}
+            </p>
+          }
+        </div>
+
+        @if (chat.last_message_id) {
+          <span class="whitegray">{{
+            isToday(chat.last_message.send_date)
+              ? getTime(chat.last_message.send_date)
+              : (chat.last_message.send_date | date: "dd/MM/yyyy")
+          }}</span>
+        }
+      </div>
+    }
+  </div>
+
+  <button
+    mat-mini-fab
+    class="bg-lightmain mt-5 position-absolute bottom-20 right-20"
+    (click)="openNewChatModal()"
+  >
+    <mat-icon>add</mat-icon>
+  </button>
+</section>
+@if (selectedChat()) {
+  <section class="messages-container flex colDir justify-space-between">
+    <div class="message-title p-20 flex justify-space-between">
+      <p class="white chat-title mb-5 flex align-items-center">
+        {{ getChatTitle(selectedChat()!) | wallet }}
+      </p>
+      <button
+        mat-flat-button
+        color="warn"
+        class="send-button font-size-16"
+        (click)="deleteChat()"
+      >
+        <mat-icon class="mr-0">delete</mat-icon>
+      </button>
+    </div>
+    <div class="messages-block white flex colDir">
+      @for (dates of messages; track dates.date) {
+        <p class="w-100 mb-20 mt-20 text-align-center">
+          {{
+            isToday(dates.date) ? "Today" : (dates.date | date: "dd/MM/yyyy")
+          }}
+        </p>
+        @for (message of dates.messages; track message.message_id) {
+          @if (isSender(message)) {
+            <div class="message-text sender flex">
+              <p class="text">{{ message.text }}</p>
+              <span class="time ml-20 mt-10 font-size-12">{{
+                getTime(message.send_date)
+              }}</span>
+            </div>
+          } @else {
+            <div class="message-text reciever flex">
+              <p class="text">{{ message.text }}</p>
+              <span class="time ml-20 mt-10 font-size-12">{{
+                getTime(message.send_date)
+              }}</span>
+            </div>
+          }
+        }
+      }
+    </div>
+    <div class="text-input flex justify-space-between">
+      <input
+        type="text"
+        class="font-size-16 pl-10 white mr-10"
+        placeholder="Write your message here..."
+        [formControl]="text"
+      />
+      <button
+        mat-flat-button
+        color="primary"
+        class="font-size-16"
+        (click)="onSend()"
+      >
+        Send
+      </button>
+    </div>
+  </section>
+}

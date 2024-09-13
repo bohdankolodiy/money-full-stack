@@ -1,0 +1,7 @@
+@import "../../../../assets/style/styles";
+
+:host {
+  @include size(100%, 100vh);
+  @include flex-box(row, nowrap, center, center);
+  background-color: #302d2d;
+}

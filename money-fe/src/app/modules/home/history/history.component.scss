@@ -1,0 +1,43 @@
+@import "../../../../assets/style/styles";
+
+.box-shadow {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+main {
+  @include size(100%, calc(100% - 70px));
+}
+
+mat-divider {
+  border-top-color: #004f4f !important;
+  border-top-width: 5px !important;
+}
+
+.history-item {
+  @include size(90%, 80px);
+
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.mat-icon {
+  @include size(initial, initial);
+}
+
+.history-block {
+  overflow-y: auto;
+  div:first-child {
+    margin-top: 0 !important;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+::-webkit-scrollbar-track {
+  background: #302d2d;
+}
+::-webkit-scrollbar-thumb {
+  background: #004f4f;
+}

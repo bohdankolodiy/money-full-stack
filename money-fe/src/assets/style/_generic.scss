@@ -1,0 +1,162 @@
+$rangeOfNumber: ();
+$cursors: ("pointer");
+$fontWeights: ("normal", "bold", "light");
+$flexPositions: ("center", "start", "end", "space-around", "space-between");
+$colors: (
+  "orange": #fdb75a,
+  "gray": gray,
+  "white": white,
+  "whitegray": #d6d3d3,
+  "lightmain": #004f4f,
+  "green": green,
+  "black": #302d2d,
+);
+
+$directions: ("center", "left", "right");
+
+@for $i from -100 through 200 {
+  $rangeOfNumber: append($rangeOfNumber, $i);
+}
+
+@each $width in $rangeOfNumber {
+  .w-#{$width} {
+    width: #{$width}+ "%" !important;
+  }
+}
+
+@each $height in $rangeOfNumber {
+  .h-#{$height} {
+    height: #{$height}+ "%" !important;
+  }
+}
+
+@each $bottom in $rangeOfNumber {
+  .bottom-#{$bottom} {
+    bottom: #{$bottom}px !important;
+  }
+}
+
+@each $top in $rangeOfNumber {
+  .top-#{$top} {
+    top: #{$top}px !important;
+  }
+}
+
+@each $right in $rangeOfNumber {
+  .right-#{$right} {
+    right: #{$right}px !important;
+  }
+}
+
+@each $left in $rangeOfNumber {
+  .left-#{$left} {
+    left: #{$left}px !important;
+  }
+}
+
+@each $margin in $rangeOfNumber {
+  .mt-#{$margin} {
+    margin-top: #{$margin}px !important;
+  }
+}
+
+@each $margin in $rangeOfNumber {
+  .mb-#{$margin} {
+    margin-bottom: #{$margin}px !important;
+  }
+}
+@each $margin in $rangeOfNumber {
+  .mr-#{$margin} {
+    margin-right: #{$margin}px !important;
+  }
+}
+
+@each $margin in $rangeOfNumber {
+  .ml-#{$margin} {
+    margin-left: #{$margin}px !important;
+  }
+}
+
+@each $margin in $rangeOfNumber {
+  .pt-#{$margin} {
+    padding-top: #{$margin}px !important;
+  }
+}
+
+@each $margin in $rangeOfNumber {
+  .pb-#{$margin} {
+    padding-bottom: #{$margin}px !important;
+  }
+}
+
+@each $margin in $rangeOfNumber {
+  .pr-#{$margin} {
+    padding-right: #{$margin}px !important;
+  }
+}
+
+@each $margin in $rangeOfNumber {
+  .pl-#{$margin} {
+    padding-left: #{$margin}px !important;
+  }
+}
+
+@each $margin in $rangeOfNumber {
+  .p-#{$margin} {
+    padding: #{$margin}px !important;
+  }
+}
+
+@each $fontSize in $rangeOfNumber {
+  .font-size-#{$fontSize} {
+    font-size: #{$fontSize}px !important;
+  }
+}
+
+@each $fontWeight in $fontWeights {
+  .font-w-#{$fontWeight} {
+    font-weight: #{$fontWeight} !important;
+  }
+}
+
+@each $cursor in $cursors {
+  .cursor-#{$cursor} {
+    cursor: pointer;
+  }
+}
+
+@each $name, $color in $colors {
+  .#{$name} {
+    color: $color;
+  }
+}
+
+@each $name, $color in $colors {
+  .bg-#{$name} {
+    background-color: $color;
+  }
+}
+
+@each $radius in $rangeOfNumber {
+  .border-radius-#{$radius} {
+    border-radius: #{$radius}px !important;
+  }
+}
+
+@each $direction in $directions {
+  .text-align-#{$direction} {
+    text-align: #{$direction} !important;
+  }
+}
+
+@each $position in $flexPositions {
+  .align-items-#{$position} {
+    align-items: #{$position} !important;
+  }
+}
+
+@each $position in $flexPositions {
+  .justify-#{$position} {
+    justify-content: #{$position} !important;
+  }
+}

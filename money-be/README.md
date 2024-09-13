@@ -1,18 +1,18 @@
-# money-full-stack
+# 🚀 Welcome to your new awesome project!
+
+This project has been created using **webpack-cli**, you can now run
 
 ## Requirements to launch the project
 
     1. Node.js: Install Node.js (v12+ is recommended for Fastify).
     2. Package Manager: Use either npm or yarn to manage dependencies.
     3. PostgreSQL: Ensure PostgreSQL is installed and running. You can install it locally or use a cloud-hosted service like AWS RDS, Heroku Postgres, or others.
-    4. Angular CLI: Install Angular CLI globally. It provides a command-line interface for Angular development.
 
 ## Commands to run the project:
 
-    For build project containers run : npm run docker:build
-    For run project docker image: npm run docker:compose
+    For build project : npm run build
 
-    For only run : For a dev server(money-be) navigate to `http://localhost:3000`. For a dev client server(money-fe) navigate to `http://localhost:4200`.
+    For only run : Run `npm run start` for a dev server. Navigate to `http://[::1]:3000`.
 
 ## Description of the project
 

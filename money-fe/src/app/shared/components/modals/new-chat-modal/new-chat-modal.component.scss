@@ -1,0 +1,54 @@
+@import "../../../../../assets/style/styles";
+
+::ng-deep {
+  .mat-mdc-dialog-container .mdc-dialog__surface {
+    background-color: #302d2d !important;
+  }
+
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+  }
+}
+
+:host {
+  @include size(400px, 600px);
+  display: block;
+}
+
+mat-divider {
+  border-top-color: #004f4f !important;
+  border-top-width: 5px !important;
+}
+
+.user-list {
+  @include size(100%, 400px);
+  overflow-y: auto;
+  padding-right: 20px;
+  padding-left: 5px;
+  padding-top: 5px;
+  .user {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 15px;
+    margin-bottom: 20px;
+
+    .user-search-button {
+      @include size(35px, 35px);
+      mat-icon {
+        line-height: 25px;
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+::-webkit-scrollbar-track {
+  background: #302d2d;
+}
+::-webkit-scrollbar-thumb {
+  background: #004f4f;
+}

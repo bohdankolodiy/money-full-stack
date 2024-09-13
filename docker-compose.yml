@@ -1,0 +1,34 @@
+services:
+  moneyfe:
+    build: 
+      context: ./money-fe
+      dockerfile: Dockerfile
+    ports:
+      - "4200:4200"
+    networks:
+      - app-network
+
+  moneybe:
+    build:
+      context: ./money-be
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    networks:
+      - app-network
+
+  db: 
+    image: postgres:latest
+    environment: 
+      POSTGRES_PASSWORD: qwerty1234
+      POSTGRES_USER: postgres
+      POSTGRES_DB: db123
+    networks:
+      - app-network
+
+
+networks:
+  app-network:
+    driver: bridge
+
+

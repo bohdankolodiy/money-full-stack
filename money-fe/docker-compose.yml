@@ -1,0 +1,13 @@
+# version: '3'
+# services:
+#   moneyfe:
+#     image: moneyfe
+#     build: .
+#     ports:
+#       - "4200:4200"
+#     networks:
+#       - app-network
+
+# networks:
+#   app-network:
+#     external: true

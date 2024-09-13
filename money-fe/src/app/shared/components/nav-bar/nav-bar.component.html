@@ -1,0 +1,69 @@
+<a
+  class="sidebar__nav-link mt-20"
+  [routerLink]="['/home']"
+  routerLinkActive="active"
+>
+  <img
+    class="nav-icon"
+    src="../../../../assets/image/cute-cartoon-wallet-with-money-in-illustration-vector.jpg"
+    alt=""
+  />
+</a>
+
+<mat-divider class="w-100"></mat-divider>
+
+<a
+  class="sidebar__nav-link mt-25"
+  [routerLink]="['/home/payment']"
+  routerLinkActive="active"
+>
+  <div class="nav-icon bg-lightmain flex align-items-center justify-center">
+    <mat-icon class="font-size-20 white">payments</mat-icon>
+  </div>
+</a>
+<a
+  class="sidebar__nav-link mt-25"
+  [routerLink]="['/home/transfers']"
+  routerLinkActive="active"
+>
+  <div class="nav-icon bg-lightmain flex align-items-center justify-center">
+    <mat-icon class="font-size-20 white">currency_exchange</mat-icon>
+  </div>
+</a>
+<a
+  class="sidebar__nav-link mt-25"
+  [routerLink]="['/home/history']"
+  routerLinkActive="active"
+>
+  <div class="nav-icon bg-lightmain flex align-items-center justify-center">
+    <mat-icon class="font-size-20 white">update</mat-icon>
+  </div>
+</a>
+<a
+  class="sidebar__nav-link mt-25"
+  [routerLink]="['/home/chat']"
+  routerLinkActive="active"
+>
+  <div class="nav-icon bg-lightmain flex align-items-center justify-center">
+    <mat-icon class="font-size-20 white">chat</mat-icon>
+  </div>
+</a>
+
+<button
+  mat-mini-fab
+  aria-label="Logout"
+  class="position-absolute bottom-80"
+  color="warn"
+  (click)="deleteAccount()"
+>
+  <mat-icon class="font-size-20">delete</mat-icon>
+</button>
+
+<button
+  mat-mini-fab
+  aria-label="Logout"
+  class="bg-lightmain position-absolute bottom-20"
+  (click)="logout()"
+>
+  <mat-icon class="font-size-20">logout</mat-icon>
+</button>

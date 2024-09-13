@@ -1,0 +1,69 @@
+<app-header [title]="'Transfers'"></app-header>
+
+<main
+  class="mt-50 flex align-items-center colDir justify-space-around"
+  [formGroup]="transfersForm"
+>
+  <section class="w-100 flex align-items-center justify-center">
+    <mat-button-toggle-group
+      name="transferType"
+      aria-label="Transfers type"
+      (change)="setTransferType($event)"
+    >
+      <mat-button-toggle color="primary" checked value="deposit"
+        >Deposit</mat-button-toggle
+      >
+      <mat-button-toggle value="withdrawal">Withdrawal</mat-button-toggle>
+    </mat-button-toggle-group>
+  </section>
+
+  <section class="card-payment">
+    <p class="white w-100 mb-20 font-size-20">Wallet account numner</p>
+    <mat-form-field class="w-100">
+      <mat-label>Enter card number</mat-label>
+      <input
+        matInput
+        placeholder="XXXX-XXXX-XXXX-XXX"
+        [formControlName]="'card'"
+        required
+      />
+      <mat-error>
+        {{ cardNumberError }}
+      </mat-error>
+    </mat-form-field>
+    <div class="flex align-items-center justify-space-between w-100 mt-80">
+      <p class="white">Your card</p>
+      <p class="white"><mat-icon>payments</mat-icon></p>
+    </div>
+  </section>
+
+  <section class="">
+    <p class="white font-size-20 mb-10">Amount</p>
+    <div
+      class="reciever-wallet flex align-items-center justify-center border-radius-10"
+    >
+      <mat-form-field class="w-100">
+        <mat-label>Enter amount</mat-label>
+        <input
+          matInput
+          placeholder="pat@example.com"
+          [formControlName]="'amount'"
+          required
+        />
+        @if (amount.invalid) {
+          <mat-error>Field is required</mat-error>
+        }
+      </mat-form-field>
+    </div>
+  </section>
+
+  <button
+    mat-flat-button
+    color="primary"
+    class="pl-50 pr-50 pt-30 pb-30 font-size-18"
+    (click)="sendMoney()"
+    [disabled]="transfersForm.invalid"
+  >
+    {{ buttonText }}
+  </button>
+</main>
