@@ -13,3 +13,5 @@
 #js files
 /src/*.js
 *.js
+
+!webpack.config.js
