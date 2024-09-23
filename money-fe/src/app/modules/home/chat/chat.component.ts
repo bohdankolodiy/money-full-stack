@@ -126,8 +126,8 @@ export class ChatComponent {
 
   getChatTitle(chat: IChatResponse): string {
     return chat.user1_id === this.userService.getCookieUser().id
-      ? chat.wallet_1
-      : chat.wallet_2;
+      ? chat.wallet_2
+      : chat.wallet_1;
   }
 
   isSender(message: IMessages): boolean {
@@ -166,7 +166,7 @@ export class ChatComponent {
     this.confirmationService
       .opneConfirmModal('Deletion', 'Are you sure you want to delete chat?')
       .pipe(
-        takeUntilDestroyed(),
+        takeUntilDestroyed(this.df),
         switchMap(() =>
           this.chatService.deleteChat(this.selectedChat()!.chat_id),
         ),
