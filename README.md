@@ -6,6 +6,7 @@
     2. Package Manager: Use either npm or yarn to manage dependencies.
     3. PostgreSQL: Ensure PostgreSQL is installed and running. You can install it locally or use a cloud-hosted service like AWS RDS, Heroku Postgres, or others.
     4. Angular CLI: Install Angular CLI globally. It provides a command-line interface for Angular development.
+    5. For EMAIL service use https://ethereal.email/login - login & pass are in env file in money-be folder
 
 ## Commands to run the project:
 
