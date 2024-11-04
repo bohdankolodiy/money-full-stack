@@ -31,6 +31,7 @@ import { TransactTypes } from '../../../shared/enums/transact-types.enum';
 import { IUser } from '../../../shared/interfaces/user.interface';
 import { UserService } from '../../../services/user/user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { WalletService } from '../../../services/wallet/wallet.service';
 
 @Component({
   selector: 'app-transfers',
@@ -81,7 +82,10 @@ export class TransfersComponent implements OnInit, OnDestroy {
     return this.transferType() === TransactTypes.DEPOSIT;
   }
 
-  constructor(private userService: UserService) {
+  constructor(
+    private userService: UserService,
+    private walletService: WalletService,
+  ) {
     effect(() => {
       this.isDeposit
         ? this.setAmountValidators()
@@ -125,8 +129,8 @@ export class TransfersComponent implements OnInit, OnDestroy {
     if (!(await this.opneConfirmModal())) return;
 
     (this.isDeposit
-      ? this.userService.depositMoney(body)
-      : this.userService.withdrawalMoney(body)
+      ? this.walletService.depositMoney(body)
+      : this.walletService.withdrawalMoney(body)
     )
       .pipe(
         takeUntilDestroyed(this.destroyRef),

@@ -18,6 +18,7 @@ import { IUser } from '../../../shared/interfaces/user.interface';
 import { UserService } from '../../../services/user/user.service';
 import { WalletPipe } from '../../../shared/pipes/wallet.pipe';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { TransactionService } from '../../../services/transaction/transaction.service';
 
 @Component({
   selector: 'app-payment',
@@ -50,7 +51,10 @@ export class PaymentComponent implements OnInit {
     return this.paymentForm.get('recieverWallet')!;
   }
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private transactionService: TransactionService,
+  ) {}
 
   ngOnInit(): void {
     this.user = this.userService.getCookieUser();
@@ -75,7 +79,7 @@ export class PaymentComponent implements OnInit {
   submit() {
     if (this.paymentForm.invalid) return;
 
-    this.userService
+    this.transactionService
       .transactMoney(this.paymentForm.getRawValue())
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(() => this.paymentForm.reset());

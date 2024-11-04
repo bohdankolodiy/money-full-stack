@@ -16,6 +16,7 @@ import { UserService } from '../../../services/user/user.service';
 import { switchMap, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { HistoryStatus } from '../../../shared/enums/history-status.enum';
+import { TransactionService } from '../../../services/transaction/transaction.service';
 
 @Component({
   selector: 'app-history',
@@ -43,6 +44,7 @@ export class HistoryComponent {
   constructor(
     private historyService: HistoryService,
     private userService: UserService,
+    private transactionService: TransactionService,
     private destroyRef: DestroyRef,
   ) {}
 
@@ -72,7 +74,7 @@ export class HistoryComponent {
   }
 
   updatePaymentStatus(item: ITransfer, status: string) {
-    this.userService
+    this.transactionService
       .updatePaymentStatus(status, item.wallet!, item.amount, item.transact_id!)
       .pipe(
         switchMap(() => this.userService.getUser()),
