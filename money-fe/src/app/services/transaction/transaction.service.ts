@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
-import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { ITransferResponse } from '../../shared/interfaces/transfers.interface';
@@ -13,7 +12,7 @@ import {
   providedIn: 'root',
 })
 export class TransactionService {
-  #pathUrl: string = environment.API + '/api/v1/';
+  #pathUrl: string = '/api/v1/';
 
   constructor(
     private http: HttpClient,

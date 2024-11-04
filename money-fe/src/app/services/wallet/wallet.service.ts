@@ -6,13 +6,12 @@ import {
 import { Observable, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
-import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WalletService {
-  #pathUrl: string = environment.API + '/api/v1/';
+  #pathUrl: string = '/api/v1/';
 
   constructor(
     private http: HttpClient,

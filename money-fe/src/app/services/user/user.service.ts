@@ -3,13 +3,12 @@ import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable, tap } from 'rxjs';
 import { IUser } from '../../shared/interfaces/user.interface';
-import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  #pathUrl: string = environment.API + '/api/v1/';
+  #pathUrl: string = '/api/v1/';
 
   constructor(
     private http: HttpClient,
@@ -42,5 +41,4 @@ export class UserService {
     this.setUserCookie(user);
     return user;
   }
-
 }
