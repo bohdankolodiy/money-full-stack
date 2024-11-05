@@ -35,10 +35,4 @@ export class UserService {
     const user = this.cookieService.get('user');
     return user ? JSON.parse(user) : '';
   }
-
-  updateUserBalance(user: IUser, balance: number) {
-    user.balance = balance;
-    this.setUserCookie(user);
-    return user;
-  }
 }

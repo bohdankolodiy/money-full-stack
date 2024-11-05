@@ -14,11 +14,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { HeaderComponent } from '../../../shared/components/header/header.component';
-import { IUser } from '../../../shared/interfaces/user.interface';
-import { UserService } from '../../../services/user/user.service';
 import { WalletPipe } from '../../../shared/pipes/wallet.pipe';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TransactionService } from '../../../services/transaction/transaction.service';
+import { WalletService } from '../../../services/wallet/wallet.service';
+import { IWallet } from '../../../shared/interfaces/wallet.interface';
 
 @Component({
   selector: 'app-payment',
@@ -37,7 +37,7 @@ import { TransactionService } from '../../../services/transaction/transaction.se
   styleUrl: './payment.component.scss',
 })
 export class PaymentComponent implements OnInit {
-  user!: IUser;
+  wallet!: IWallet;
   paymentForm!: FormGroup;
   private destroyRef = inject(DestroyRef);
 
@@ -52,12 +52,12 @@ export class PaymentComponent implements OnInit {
   }
 
   constructor(
-    private userService: UserService,
+    private walletService: WalletService,
     private transactionService: TransactionService,
   ) {}
 
   ngOnInit(): void {
-    this.user = this.userService.getCookieUser();
+    this.walletService.getUserWallet().subscribe((res) => (this.wallet = res));
     this.buildPaymentForm();
   }
 
@@ -87,7 +87,7 @@ export class PaymentComponent implements OnInit {
 
   balanceValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null =>
-      this.user!.balance < control.value
+      (this.wallet?.balance ?? 0) < control.value
         ? { notmatch: 'The amount must be equal or less then balance' }
         : null;
   }

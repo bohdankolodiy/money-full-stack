@@ -80,7 +80,7 @@ export class NewChatModalComponent implements OnInit {
   onCreate(item: IUser) {
     this.dialog.close({
       user2_id: item.id,
-      wallet_2: item.wallet,
+      wallet_2: item.wallet_id,
     } as IChatBody);
   }
 }

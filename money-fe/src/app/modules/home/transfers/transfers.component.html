@@ -50,8 +50,11 @@
           [formControlName]="'amount'"
           required
         />
-        @if (amount.invalid) {
+        @if (amount.hasError("required")) {
           <mat-error>Field is required</mat-error>
+        }
+        @if (amount.hasError("notmatch")) {
+          <mat-error>You have not enough money</mat-error>
         }
       </mat-form-field>
     </div>

@@ -1,7 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
-import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { UserService } from '../user/user.service';
 import { ITransacts } from '../../shared/interfaces/transacts.interface';
@@ -16,8 +14,6 @@ export class HistoryService {
   constructor(
     private http: HttpClient,
     private userService: UserService,
-    private cookieService: CookieService,
-    private toastr: ToastrService,
   ) {}
 
   searchAllHistory(id: string): Observable<ITransfer[]> {
@@ -25,7 +21,7 @@ export class HistoryService {
   }
 
   getUserHistory(): Observable<ITransacts[]> {
-    const { id } = this.userService.getCookieUser();
-    return this.http.get<ITransacts[]>(`${this.#pathUrl}history/${id}`);
+    const { wallet_id } = this.userService.getCookieUser();
+    return this.http.get<ITransacts[]>(`${this.#pathUrl}history/${wallet_id}`);
   }
 }

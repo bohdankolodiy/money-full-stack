@@ -107,6 +107,9 @@ export class HistoryComponent {
   }
 
   isLastTransfer(item: ITransfer): boolean {
-    return this.transacts[0]?.items[0]?.id === item.id;
+    return (
+      this.transacts[0]?.items[0]?.id === item.id &&
+      item.action === TransactTypes.PAYMENT
+    );
   }
 }

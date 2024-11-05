@@ -6,6 +6,7 @@ import {
 import { Observable, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
+import { IWallet } from '../../shared/interfaces/wallet.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +18,10 @@ export class WalletService {
     private http: HttpClient,
     private toastr: ToastrService,
   ) {}
+
+  getUserWallet(): Observable<IWallet> {
+    return this.http.get<IWallet>(`${this.#pathUrl}wallet`);
+  }
 
   depositMoney(body: ITransferBody): Observable<ITransferResponse> {
     return this.http

@@ -1,7 +1,6 @@
 export interface IUser {
   id: string;
   email: string;
-  wallet: string;
-  balance: number;
+  wallet_id: string;
   is_verify: boolean;
 }
