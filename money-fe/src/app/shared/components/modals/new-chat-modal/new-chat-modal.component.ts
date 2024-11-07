@@ -11,11 +11,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { UserService } from '../../../../services/user/user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { IUser } from '../../../interfaces/user.interface';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { WalletPipe } from '../../../pipes/wallet.pipe';
 import { IChatBody, IChatResponse } from '../../../interfaces/chat.interface';
+import { IUsersForChat } from '../../../interfaces/user.interface';
 
 interface IModal {
   title: string;
@@ -42,7 +42,7 @@ interface IModal {
 })
 export class NewChatModalComponent implements OnInit {
   search: FormControl<string | null> = new FormControl(null);
-  users: IUser[] = [];
+  users: IUsersForChat[] = [];
 
   get title(): string {
     return this.data.title ?? '';
@@ -60,16 +60,10 @@ export class NewChatModalComponent implements OnInit {
 
   getUsers() {
     this.userService
-      .getUsers()
+      .getUsersForChat()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((res) => {
-        this.users = res.filter(
-          (item: IUser) =>
-            !this.data.chats.some(
-              (el: IChatResponse) =>
-                el.user1_id === item.id || el.user2_id === item.id,
-            ),
-        );
+        this.users = res;
       });
   }
 
@@ -77,10 +71,9 @@ export class NewChatModalComponent implements OnInit {
     this.dialog.close();
   }
 
-  onCreate(item: IUser) {
+  onCreate(item: IUsersForChat) {
     this.dialog.close({
-      user2_id: item.id,
-      wallet_2: item.wallet_id,
+      user_reciever_id: item.id,
     } as IChatBody);
   }
 }

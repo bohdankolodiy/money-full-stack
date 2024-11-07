@@ -14,8 +14,7 @@ export interface IMessagesResponce {
 }
 
 export interface IChatBody {
-  user2_id: string;
-  wallet_2: string;
+  user_reciever_id: string;
 }
 
 export interface IMessages {

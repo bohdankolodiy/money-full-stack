@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable, tap } from 'rxjs';
-import { IUser } from '../../shared/interfaces/user.interface';
+import { IUser, IUsersForChat } from '../../shared/interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -23,8 +23,8 @@ export class UserService {
     );
   }
 
-  getUsers(): Observable<IUser[]> {
-    return this.http.get<IUser[]>(`${this.#pathUrl}user/all`);
+  getUsersForChat(): Observable<IUsersForChat[]> {
+    return this.http.get<IUsersForChat[]>(`${this.#pathUrl}user/forChat`);
   }
 
   setUserCookie(user: IUser) {

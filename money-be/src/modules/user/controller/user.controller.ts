@@ -16,13 +16,15 @@ class UserController {
     }
   }
 
-  async getUsers(req: FastifyRequest, reply: FastifyReply) {
+  async getUsersForChat(req: FastifyRequest, reply: FastifyReply) {
     try {
-      const users: IUser[] = await userService.getUsers(req);
-
+      const users = await userService.getUsersForChat(
+        req.db,
+        (req.user as IUser).id
+      );
       return reply.code(200).send(users);
     } catch (e) {
-      return reply.code(500).send({ message: e });
+      return reply.code(500).send(e);
     }
   }
 }

@@ -4,3 +4,8 @@ export interface IUser {
   wallet_id: string;
   is_verify: boolean;
 }
+
+export interface IUsersForChat {
+  id: string;
+  wallet: string;
+}
