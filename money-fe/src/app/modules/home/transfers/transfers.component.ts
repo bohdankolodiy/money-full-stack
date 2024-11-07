@@ -28,10 +28,9 @@ import { ConfirmationModalComponent } from '../../../shared/components/modals/co
 import { filter, tap } from 'rxjs';
 import { HeaderComponent } from '../../../shared/components/header/header.component';
 import { TransactTypes } from '../../../shared/enums/transact-types.enum';
-import { IUser } from '../../../shared/interfaces/user.interface';
-import { UserService } from '../../../services/user/user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { WalletService } from '../../../services/wallet/wallet.service';
+import { IWallet } from '../../../shared/interfaces/wallet.interface';
 
 @Component({
   selector: 'app-transfers',
@@ -52,7 +51,7 @@ import { WalletService } from '../../../services/wallet/wallet.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TransfersComponent implements OnInit, OnDestroy {
-  user!: IUser;
+  wallet!: IWallet;
   private destroyRef = inject(DestroyRef);
   _dialog = inject(MatDialog);
   transferType = signal<string>(TransactTypes.DEPOSIT);
@@ -82,10 +81,7 @@ export class TransfersComponent implements OnInit, OnDestroy {
     return this.transferType() === TransactTypes.DEPOSIT;
   }
 
-  constructor(
-    private userService: UserService,
-    private walletService: WalletService,
-  ) {
+  constructor(private walletService: WalletService) {
     effect(() => {
       this.isDeposit
         ? this.setAmountValidators()
@@ -97,12 +93,13 @@ export class TransfersComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.user = this.userService.getCookieUser();
+    this.walletService.getUserWallet().subscribe((res) => (this.wallet = res));
     this.buildTransfersForm();
   }
 
   setAmountValidators(validator: ValidatorFn[] = [Validators.required]) {
     this.amount && this.amount?.setValidators(validator);
+    this.amount.updateValueAndValidity();
   }
 
   buildTransfersForm() {
@@ -136,13 +133,7 @@ export class TransfersComponent implements OnInit, OnDestroy {
         takeUntilDestroyed(this.destroyRef),
         tap(() => this.transfersForm.reset()),
       )
-      .subscribe(
-        (res) =>
-          (this.user = this.userService.updateUserBalance(
-            this.user,
-            res.balance,
-          )),
-      );
+      .subscribe((res) => (this.wallet.balance = res.balance));
   }
 
   async opneConfirmModal() {
@@ -163,7 +154,7 @@ export class TransfersComponent implements OnInit, OnDestroy {
 
   balanceValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null =>
-      this.user.balance < control.value
+      (this.wallet.balance ?? 0) <= control.value
         ? { notmatch: 'The amount must be equal or less then balance' }
         : null;
   }

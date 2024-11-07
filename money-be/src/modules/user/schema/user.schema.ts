@@ -3,11 +3,15 @@ import { Type } from "@sinclair/typebox";
 export const UserObject = Type.Object({
   id: Type.String(),
   email: Type.String({ format: "email" }),
-  wallet: Type.String(),
-  balance: Type.Number(),
+  wallet_id: Type.String(),
 });
 
-export const UsersArray = Type.Array(UserObject);
+export const UsersForChatObject = Type.Object({
+  id: Type.String(),
+  wallet: Type.String(),
+});
+
+export const UsersForChatArray = Type.Array(UsersForChatObject);
 
 export const getUserSchema = {
   schema: {
@@ -17,10 +21,10 @@ export const getUserSchema = {
   },
 };
 
-export const getUsersSchema = {
+export const getUsersForChatSchema = {
   schema: {
     response: {
-      200: UsersArray,
+      200: UsersForChatArray,
     },
   },
 };

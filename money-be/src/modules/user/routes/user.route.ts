@@ -2,7 +2,7 @@ import { FastifyInstance } from "fastify";
 import { userController } from "../controller/user.controller";
 import {
   getUserSchema,
-  getUsersSchema,
+  getUsersForChatSchema,
 } from "../schema/user.schema";
 
 export async function userRoutes(app: FastifyInstance) {
@@ -15,11 +15,11 @@ export async function userRoutes(app: FastifyInstance) {
     userController.getUser
   );
   app.get(
-    "/all",
+    "/forChat",
     {
       preHandler: [app.authenticate],
-      ...getUsersSchema,
+      ...getUsersForChatSchema,
     },
-    userController.getUsers
+    userController.getUsersForChat
   );
 }

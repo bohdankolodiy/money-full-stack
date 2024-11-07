@@ -3,9 +3,9 @@
 
   <section class="mt-30 card-payment">
     <p class="white w-100 mb-20 font-size-20">Wallet account numner</p>
-    <p class="white w-100">{{ user.wallet | wallet }}</p>
+    <p class="white w-100">{{ wallet?.wallet || "" | wallet }}</p>
     <div class="flex align-items-center justify-space-between w-100 mt-100">
-      <p class="white">{{ user.balance }}</p>
+      <p class="white">{{ wallet?.balance || 0 }}</p>
       <p class="white"><mat-icon>payments</mat-icon></p>
     </div>
   </section>

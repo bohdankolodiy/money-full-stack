@@ -12,17 +12,24 @@ class UserService {
     return (await db.query(`Select * from users where id = $1`, [id])).rows[0];
   }
 
-  async getUsers(req: FastifyRequest): Promise<IUser[]> {
+  async getUsersForChat(db: PostgresDb, user_id: string): Promise<IUser[]> {
     return (
-      await req.db.query(`Select * from users where id != $1`, [
-        (await userService.getAuthUser(req)).id,
-      ])
+      await db.query(
+        `SELECT u.id, w.wallet AS wallet
+          FROM 
+            users u
+          JOIN
+            wallets w ON w.id = u.wallet_id
+          WHERE 
+            u.id != $1
+            AND NOT EXISTS (
+                SELECT 1 
+                FROM chat c 
+                WHERE c.user1_id = u.id OR c.user2_id = u.id
+            )`,
+        [user_id]
+      )
     ).rows;
-  }
-
-  async findOneByWallet(db: PostgresDb, wallet: string): Promise<IUser> {
-    return (await db.query(`Select * from users where wallet=$1`, [wallet]))
-      .rows[0];
   }
 
   async transferMoney(
