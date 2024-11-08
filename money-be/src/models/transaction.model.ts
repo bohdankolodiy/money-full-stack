@@ -1,8 +1,8 @@
-import generateUniqueId from "generate-unique-id";
+import { v7 as uuidv7 } from "uuid";
 import { ITransaction } from "../interfaces/transact.interface";
 
 export class Transactions implements ITransaction {
-  id = generateUniqueId();
+  id = uuidv7();
   amount: number;
   status: string;
   reciever_id: string;
