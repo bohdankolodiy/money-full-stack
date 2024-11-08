@@ -15,7 +15,7 @@
   <mat-divider class="w-100 mb-5"></mat-divider>
 
   <div class="chat-list-container">
-    @for (chat of chats; track chat.chat_id) {
+    @for (chat of filteredChats; track chat.chat_id) {
       <div
         class="chat w-100 flex justify-space-between align-items-center mb-5"
         (click)="onSelectChat(chat)"
