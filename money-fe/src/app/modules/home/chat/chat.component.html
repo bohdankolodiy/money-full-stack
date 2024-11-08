@@ -65,7 +65,7 @@
         <mat-icon class="mr-0">delete</mat-icon>
       </button>
     </div>
-    <div class="messages-block white flex colDir">
+    <div class="messages-block white flex colDir" #messagesBlock>
       @for (dates of messages; track dates.date) {
         <p class="w-100 mb-20 mt-20 text-align-center">
           {{

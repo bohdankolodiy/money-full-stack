@@ -3,11 +3,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
   IChatBody,
+  IChatMessages,
   IChatResponse,
-  IMessages,
-  IMessagesResponce,
+  IMessage,
 } from '../../shared/interfaces/chat.interface';
-
 @Injectable({
   providedIn: 'root',
 })
@@ -23,14 +22,14 @@ export class ChatService {
     return this.http.post<IChatResponse>(`${this.#pathUrl}chat/create`, body);
   }
 
-  getChatMessage(id: string): Observable<IMessagesResponce[]> {
-    return this.http.get<IMessagesResponce[]>(
-      `${this.#pathUrl}chat/message/${id}`,
+  getChatMessage(id: string, page: number = 0): Observable<IChatMessages> {
+    return this.http.get<IChatMessages>(
+      `${this.#pathUrl}chat/message/${id}?page=${page}`,
     );
   }
 
-  addMessage(body: Partial<IMessages>): Observable<IMessages> {
-    return this.http.post<IMessages>(`${this.#pathUrl}chat/message/add`, body);
+  addMessage(body: Partial<IMessage>): Observable<IMessage> {
+    return this.http.post<IMessage>(`${this.#pathUrl}chat/message/add`, body);
   }
 
   deleteChat(chat_id: string): Observable<unknown> {

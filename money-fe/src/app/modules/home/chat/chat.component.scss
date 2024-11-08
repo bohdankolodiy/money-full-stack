@@ -74,7 +74,10 @@
   .messages-block {
     @include size(calc(100% - 40px), 80%);
     margin: 0px auto;
-    overflow-y: auto;
+    overflow-y: scroll;
+    & > :first-child {
+      margin-top: auto !important;
+    }
   }
 
   .message-text {

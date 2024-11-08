@@ -22,6 +22,11 @@ export const MessageResponseObject = Type.Object({
   messages: Type.Array(MessageObject),
 });
 
+export const ChatMessageResponseObject = Type.Object({
+  chat_messages: Type.Array(MessageResponseObject),
+  last_page: Type.Number(),
+});
+
 export const ChatResponseObject = Type.Array(
   Type.Object({
     chat_id: Type.String(),
@@ -34,12 +39,12 @@ export const ChatResponseObject = Type.Array(
   })
 );
 
-export const ChatBobyObject = Type.Object({
-  user_reciever_id: Type.String(),
-});
-
 export const ParamsObject = Type.Object({
   id: Type.String(),
+});
+
+export const ChatBobyObject = Type.Object({
+  user_reciever_id: Type.String(),
 });
 
 export const MessageBobyObject = Type.Object({
@@ -94,8 +99,15 @@ export const MessageSchema = {
         id: { type: "string" },
       },
     },
+    querystring: {
+      type: "object",
+      required: ["page"],
+      properties: {
+        page: { type: "number" },
+      },
+    },
     response: {
-      200: Type.Array(MessageResponseObject),
+      200: ChatMessageResponseObject,
     },
   },
 };

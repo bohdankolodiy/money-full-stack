@@ -5,19 +5,24 @@ export interface IChatResponse {
   wallet_1: string;
   wallet_2: string;
   last_message_id: string;
-  last_message: IMessages;
+  last_message: IMessage;
+}
+
+export interface IChatMessages {
+  chat_messages: IMessagesResponce[];
+  last_page: number;
 }
 
 export interface IMessagesResponce {
   date: string;
-  messages: IMessages[];
+  messages: IMessage[];
 }
 
 export interface IChatBody {
   user_reciever_id: string;
 }
 
-export interface IMessages {
+export interface IMessage {
   message_id: string;
   text: string;
   send_date: string;
